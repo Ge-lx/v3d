@@ -209,9 +209,11 @@ class Space {
   // }
 
   spawnLines () {
-    if (!this.lines) this.lines = new Array(this.maxLines)
+    if(this.lines)
+      this.lines.forEach(line => line.destroy())
+
+    this.lines = new Array(this.maxLines)
     for (let i = 0; i < this.maxLines; i++) {
-      if (this.lines[i]) this.lines[i].destroy()
       this.lines[i] = (new Line(this.randomPoint(), this.maxPoints, this.decay, this))
     }
   }
