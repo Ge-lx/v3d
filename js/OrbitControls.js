@@ -1050,4 +1050,4 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 	}
 
 } );
-/* three-orbitcontrols addendum */ module.exports = exports.default = THREE.OrbitControls;
+/* three-orbitcontrols addendum */ //module.exports = exports.default = THREE.OrbitControls;

@@ -3,14 +3,157 @@
   <head>
     <meta charset=utf-8>
     <title>3D Vectorfields</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton|Space+Mono" rel="stylesheet">
     <style>
-      body { margin: 0; }
+      body {
+        margin: 0;
+      }
+      h2 {
+        font-family: 'Anton', sans-serif;
+        letter-spacing: 2px;
+        font-size: 2em;
+        margin: 1em;
+      }
       canvas { width: 100%; height: 100% }
+      #canvas { 
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%
+      }
+      #controls {
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 58, 67, 0.5);
+        padding: 1em;
+        border-radius: 0.2em;
+        border: 1px solid #009FB7;
+        color: #B9BAB8;
+      }
+
+      .header {
+        width: auto;
+        margin: 0.5em 1em;
+        border-bottom: 1px solid #009FB7;
+        text-align: center;
+      }
+
+      #options_holder {
+        padding: 0.6em;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 0.3em;
+      }
+
+      p {
+        font-family: "Space Mono", monospace;
+        margin: 0.2em;
+      }
+
+      .fw {
+        width: auto;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        margin: 0.5em;
+        margin-top: -0.5em;
+        text-align: center;
+      }
+
+      input {
+        background: none;
+        border: 1px solid #009FB7;
+        color: white;
+        padding: 0.2em;
+        border-radius: 0.2em;
+      }
+
+      .option {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-end;
+        padding: 0.5em;
+      }
+
+      .option > p {
+        display: inline;
+      }
+
+      #code_holder {
+        display: flex;
+        flex-flow: column wrap;
+        font-size: 0.9em;
+      }
+
+      #userjs {
+        background: none;
+        border: 1px dashed rgba(255, 255, 255, 0.16);
+        border-radius: 0.5em;
+        width: auto;
+        font-family: "Space Mono", monospace;
+        font-size: 0.9em;
+        min-width: 400px;
+        min-height: 50px;
+        padding-left: 1em;
+        color: #009FB7;;
+      }
+
     </style>
   </head>
   <body>
+    <script src="js/autosize.min.js"></script>
     <script src="js/three.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/v3d.js"></script>
+    <div id="controls">
+      <h2 class="header">Configuration</h2>
+      <div id="options_holder">
+        <p class="fw">Particle spawn range</p>
+        <div>
+          <p>X - Range</p>
+          <input type='number' id="rangex1" value="-50">
+          <input type='number' id="rangex2" value="50">
+        </div>
+        <div>
+          <p>Y - Range</p>
+          <input type='number' id="rangey1" value="-5">
+          <input type='number' id="rangey2" value="5">
+        </div>
+        <div>
+            <p>Z - Range</p>
+            <input type='number' id="rangez1" value="-50">
+            <input type='number' id="rangez2" value="50">
+        </div>
+      </div>
+      <div class="option">
+        <p>Linecount</p>
+        <input id="linecount" type="number" value="800">
+      </div>
+      <div class="option">
+        <p>Line buffer length</p>
+        <input id="linebuffer" type="number" value="1024">
+      </div>
+      <div class="option">
+        <p>Decay prob.</p>
+        <input id="decay" type="number" value="1">
+      </div>
+      <div class="option">
+        <p>Animation timestep</p>
+        <input id="timestep" type="number" value="0.1">
+      </div>
+      <div class="option">
+        <p>Scale</p>
+        <input id="scale" type="number" value="1">
+      </div>
+      <h2 class="header">Vectorfield</h2>
+      <div id="code_holder">
+        <p>function transformation (v) {</p>
+        <textarea id="userjs">return [ Math.sin(0.5 * v[1]), Math.cos(0.5 * v[0]), 0.1 + (Math.sqrt(v[2]) * 0.01) ]</textarea>
+        <p>}</p>
+        <p id='evalerror'></p>
+        <button onclick="applyUserChanges()">Apply</button>
+      </div>
+    </div>
+    <div id="canvas"></div>
   </body>
 </html>
