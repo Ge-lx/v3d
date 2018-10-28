@@ -3,7 +3,7 @@
   <head>
     <meta charset=utf-8>
     <title>3D Vectorfields</title>
-    <link href="https://fonts.googleapis.com/css?family=Anton|Space+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
     <style>
       body {
         margin: 0;
@@ -48,15 +48,15 @@
       }
 
       p {
-        font-family: "Space Mono", monospace;
+        font-family: monospace;
         margin: 0.2em;
       }
 
       .fw {
         width: auto;
         border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-        margin: 0.5em;
-        margin-top: -0.5em;
+        padding: 0.2em;
+        margin-top: -0.4em;
         text-align: center;
       }
 
@@ -82,7 +82,6 @@
       #code_holder {
         display: flex;
         flex-flow: column wrap;
-        font-size: 0.9em;
       }
 
       #userjs {
@@ -90,8 +89,7 @@
         border: 1px dashed rgba(255, 255, 255, 0.16);
         border-radius: 0.5em;
         width: auto;
-        font-family: "Space Mono", monospace;
-        font-size: 0.9em;
+        font-family: monospace;
         min-width: 400px;
         min-height: 50px;
         padding-left: 1em;
@@ -111,35 +109,35 @@
         <p class="fw">Particle spawn range</p>
         <div>
           <p>X - Range</p>
-          <input type='number' id="rangex1" value="-50">
-          <input type='number' id="rangex2" value="50">
+          <input type='number' id="rangex1" value="-80">
+          <input type='number' id="rangex2" value="80">
         </div>
         <div>
           <p>Y - Range</p>
-          <input type='number' id="rangey1" value="-5">
-          <input type='number' id="rangey2" value="5">
+          <input type='number' id="rangey1" value="-80">
+          <input type='number' id="rangey2" value="80">
         </div>
         <div>
             <p>Z - Range</p>
-            <input type='number' id="rangez1" value="-50">
-            <input type='number' id="rangez2" value="50">
+            <input type='number' id="rangez1" value="-1">
+            <input type='number' id="rangez2" value="1">
         </div>
       </div>
       <div class="option">
         <p>Linecount</p>
-        <input id="linecount" type="number" value="400">
+        <input id="linecount" type="number" value="600">
       </div>
       <div class="option">
         <p>Line buffer length</p>
-        <input id="linebuffer" type="number" value="1024">
+        <input id="linebuffer" type="number" value="2048">
       </div>
       <div class="option">
-        <p>Decay prob.</p>
+        <p>Decay probability</p>
         <input id="decay" type="number" value="1">
       </div>
       <div class="option">
         <p>Animation timestep</p>
-        <input id="timestep" type="number" value="0.1">
+        <input id="timestep" type="number" value="0.04">
       </div>
       <div class="option">
         <p>Scale</p>
@@ -148,7 +146,7 @@
       <h2 class="header">Vectorfield</h2>
       <div id="code_holder">
         <p>function transformation (v) {</p>
-        <textarea id="userjs">return [ Math.sin(0.5 * v[1]), Math.cos(0.5 * v[0]), 0.1 + (Math.sqrt(v[2]) * 0.01) ]</textarea>
+        <textarea id="userjs">return [ 0.1 * v[1], -0.2* v[1], 2 ]</textarea>
         <p>}</p>
         <p id='evalerror'></p>
         <button onclick="applyUserChanges()">Apply</button>
