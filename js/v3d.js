@@ -254,7 +254,11 @@ function getByID (id) {
   return document.getElementById(id)
 }
 
-let default_transformation = 'return [ Math.sin(0.5 * v[1]), Math.cos(0.5 * v[0]), 0.1 + (Math.sqrt(v[2]) * 0.01) ]'
+let default_transformation = `return [
+  0,
+  2 * Math.cos(0.04*v[2]),
+  2* Math.sin(0.02*v[1])
+];`
 const wrapper = '(function transform (v) { %exp% })'
 
 function evalTransformFunction () {

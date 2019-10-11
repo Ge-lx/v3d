@@ -109,7 +109,7 @@
         <p class="fw">Particle spawn range</p>
         <div>
           <p>X - Range</p>
-          <input type='number' id="rangex1" value="-80">
+          <input type='number' id="rangex1" value="-20">
           <input type='number' id="rangex2" value="80">
         </div>
         <div>
@@ -119,25 +119,25 @@
         </div>
         <div>
             <p>Z - Range</p>
-            <input type='number' id="rangez1" value="-1">
-            <input type='number' id="rangez2" value="1">
+            <input type='number' id="rangez1" value="-80">
+            <input type='number' id="rangez2" value="80">
         </div>
       </div>
       <div class="option">
         <p>Linecount</p>
-        <input id="linecount" type="number" value="600">
+        <input id="linecount" type="number" value="1024">
       </div>
       <div class="option">
         <p>Line buffer length</p>
-        <input id="linebuffer" type="number" value="2048">
+        <input id="linebuffer" type="number" value="1024">
       </div>
       <div class="option">
         <p>Decay probability</p>
-        <input id="decay" type="number" value="1">
+        <input id="decay" type="number" value="1.0">
       </div>
       <div class="option">
         <p>Animation timestep</p>
-        <input id="timestep" type="number" value="0.04">
+        <input id="timestep" type="number" value="0.2">
       </div>
       <div class="option">
         <p>Scale</p>
@@ -146,7 +146,11 @@
       <h2 class="header">Vectorfield</h2>
       <div id="code_holder">
         <p>function transformation (v) {</p>
-        <textarea id="userjs">return [ 0.1 * v[1], -0.2* v[1], 2 ]</textarea>
+        <textarea id="userjs">return [
+  0,
+  2 * Math.cos(0.04*v[2]),
+  2* Math.sin(0.02*v[1])
+];</textarea>
         <p>}</p>
         <p id='evalerror'></p>
         <button onclick="applyUserChanges()">Apply</button>
